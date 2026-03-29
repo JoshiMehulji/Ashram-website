@@ -8,10 +8,10 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
-    { name: 'Prabhu Baa', href: '#prabhu-baa' },
+    { name: 'Prabhu Baa', href: '/parampujya-paramhans-swami-sugandheshwaranand-rajyogi-prabhu-baa' },
     { name: 'Shiv Pravah', href: '/shiv-pravah' },
     { name: 'Ashrams', href: '#ashrams' },
-    { name: 'Meditation', href: '#programs' },
+    { name: 'Meditation', href: '/meditation' },
     { name: 'Events', href: '#events' },
     { name: 'Health', href: '#health' },
     { name: 'Donation', href: '#donation' },
@@ -41,7 +41,7 @@ export default function Header() {
           </div>
 
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 relative z-40"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg
@@ -74,7 +74,7 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <button className="btn-primary w-full mt-4">Sign In</button>
+            {/* <button className="btn-primary w-full mt-4">Sign In</button> */}
           </div>
         )}
       </nav>

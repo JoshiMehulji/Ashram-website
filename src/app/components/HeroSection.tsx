@@ -2,18 +2,18 @@ import Image from 'next/image';
 
 export default function HeroSection() {
   return (
-    <section className="relative h-[600px] lg:h-[700px] overflow-hidden">
-      <div className="absolute inset-0">
+    <section className="relative h-[500px] overflow-hidden">
+      <div className="">
         <Image
-          src="https://images.pexels.com/photos/1051838/pexels-photo-1051838.jpeg"
+          src="/assets/images/banner.png"
           alt="Meditation and spiritual practice"
           fill
-          className="object-cover brightness-75"
+          className="object-cover"
           priority
         />
       </div>
 
-      <div className="relative h-full flex items-center">
+      {/* <div className="relative h-full flex items-center">
         <div className="section-container">
           <div className="max-w-3xl">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
@@ -30,7 +30,7 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
 }
