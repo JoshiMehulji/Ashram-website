@@ -7,11 +7,17 @@ import Image from "next/image";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
+    null,
+  );
 
   const toggleDropdown = (name: string) => {
     setOpenDropdown((prev) => (prev === name ? null : name));
   };
 
+  const toggleMobileDropdown = (name: string) => {
+    setOpenMobileDropdown((prev) => (prev === name ? null : name));
+  };
 
   const navigation = [
     {
@@ -72,7 +78,12 @@ export default function Header() {
                   onClick={() => item.Children && toggleDropdown(item.name)}
                   className="flex items-center cursor-pointer text-earth-brown hover:text-accent-orange transition-colors font-semibold italic text-sm"
                 >
-                  <Link className="hover:scale-105 transition-all duration-200" href={item.href || "#"}>{item.name}</Link>
+                  <Link
+                    className="hover:scale-105 transition-all duration-200"
+                    href={item.href || "#"}
+                  >
+                    {item.name}
+                  </Link>
 
                   {/* Arrow Icon */}
                   {item.Children && (
@@ -81,7 +92,20 @@ export default function Header() {
                         openDropdown === item.name ? "rotate-180" : ""
                       }`}
                     >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-chevron-down-icon lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        className="lucide lucide-chevron-down-icon lucide-chevron-down"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
                     </span>
                   )}
                 </div>
@@ -95,7 +119,7 @@ export default function Header() {
                         href={child.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-accent-orange hover:bg-white hover:scale-105 transition-all duration-200"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-accent-orange hover:bg-white hover:scale-105 transition-all duration-200 font-semibold"
                       >
                         {child.name}
                       </a>
@@ -131,16 +155,62 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="lg:hidden mt-4 pb-4 border-t border-earth-beige pt-4">
             {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="block py-2 text-earth-brown hover:text-accent-orange transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
+              <div key={item.name} className="mb-2">
+                {/* Main Item */}
+                <div
+                  onClick={() =>
+                    item.Children
+                      ? toggleMobileDropdown(item.name)
+                      : setMobileMenuOpen(false)
+                  }
+                  className="flex justify-between items-center py-2 text-earth-brown hover:text-accent-orange transition-colors cursor-pointer font-semibold text-sm"
+                >
+                  <span>{item.name}</span>
+
+                  {/* Arrow */}
+                  {item.Children && (
+                    <span
+                      className={`transition-transform duration-200 ${
+                        openMobileDropdown === item.name ? "rotate-180" : ""
+                      }`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        className="lucide lucide-chevron-down-icon lucide-chevron-down"
+                      >
+                        <path d="m6 9 6 6 6-6" />
+                      </svg>
+                    </span>
+                  )}
+                </div>
+
+                {/* Dropdown Items */}
+                {item.Children && openMobileDropdown === item.name && (
+                  <div className="pl-4">
+                    {item.Children.map((child) => (
+                      <a
+                        key={child.name}
+                        href={child.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block py-2 text-sm text-gray-600 hover:text-accent-orange font-semibold"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {child.name}
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
-            {/* <button className="btn-primary w-full mt-4">Sign In</button> */}
           </div>
         )}
       </nav>
