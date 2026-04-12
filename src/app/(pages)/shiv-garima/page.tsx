@@ -59,7 +59,7 @@ const page = () => {
       <div className="h-[200px] bg-amber-300 flex justify-center items-center">
         <h2 className="text-2xl font-bold">
           <blockquote className="text-2xl md:text-5xl font-serif italic mb-8 leading-relaxed text-red-500">
-            Shiv Pravah
+            Shiv Garima
           </blockquote>
         </h2>
       </div>

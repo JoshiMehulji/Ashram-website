@@ -7,7 +7,7 @@ export default function ProgramsSection() {
   const router = useRouter();
 
   return (
-    <section id="programs" className="py-20 bg-white px-4 md:px-10">
+    <section id="programs" className="py-20 bg-orange-300 px-4 md:px-10">
       <div className="section-container">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-earth-dark mb-4">
@@ -19,12 +19,12 @@ export default function ProgramsSection() {
           {programs.map((program) => (
             <div
               key={program.title}
-              className="bg-earth-cream rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 w-full md:w-[30%]"
+              className="bg-earth-cream rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-all hover:-translate-y-1 w-full md:w-[30%] bg-[#f7f7f7]"
               onClick={() => {
                 router.push(`/${program?.slug}`);
               }}
             >
-              <div className="relative h-64 bg-[#f7f7f7]">
+              <div className="relative h-64 bg-[#f7f7f7] border-b">
                 <Image
                   src={program.image}
                   alt={program.title}
