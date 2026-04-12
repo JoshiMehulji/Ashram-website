@@ -75,7 +75,13 @@ export default function Header() {
               <div key={item.name} className="relative">
                 {/* Main Menu Item */}
                 <div
-                  onClick={() => item.Children && toggleDropdown(item.name)}
+                  onClick={() => {
+                    if(item.Children){
+                      toggleDropdown(item.name)
+                    } else {
+                      toggleDropdown('')
+                    }
+                  }}
                   className="flex items-center cursor-pointer text-earth-brown hover:text-accent-orange transition-colors font-semibold italic text-sm"
                 >
                   <Link
@@ -158,14 +164,17 @@ export default function Header() {
               <div key={item.name} className="mb-2">
                 {/* Main Item */}
                 <div
-                  onClick={() =>
-                    item.Children
-                      ? toggleMobileDropdown(item.name)
-                      : setMobileMenuOpen(false)
-                  }
+                  onClick={() =>{
+                    if(item.Children) {
+                      toggleMobileDropdown(item.name)
+                    } else {
+                      setMobileMenuOpen(false)
+                      toggleMobileDropdown('')
+                    }
+                  }}
                   className="flex justify-between items-center py-2 text-earth-brown hover:text-accent-orange transition-colors cursor-pointer font-semibold text-sm"
                 >
-                  <span>{item.name}</span>
+                  <Link href={item.href}>{item.name}</Link>
 
                   {/* Arrow */}
                   {item.Children && (
