@@ -12,7 +12,7 @@ export default function Home() {
       {/* <WisdomSection /> */}
       <ProgramsSection />
       <QuoteSection />
-      <EventsSection />
+      {/* <EventsSection /> */}
       {/* <NewsletterSection /> */}
     </main>
   );

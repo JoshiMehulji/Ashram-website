@@ -3,6 +3,7 @@
 import { Children, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -10,6 +11,7 @@ export default function Header() {
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(
     null,
   );
+  const router = useRouter()
 
   const toggleDropdown = (name: string) => {
     setOpenDropdown((prev) => (prev === name ? null : name));
@@ -27,23 +29,26 @@ export default function Header() {
     { name: "Shiv Garima", href: "/shiv-garima" },
     { name: "Ashrams", href: "/ashrams" },
     { name: "Meditation", href: "/meditation" },
-    { name: "Events", href: "/#events" },
+    { name: "Events", href: "/events" },
     {
       name: "Forms",
       href: "#",
       Children: [
-        { name: "Rudrabhishek", url: "https://zfrmz.in/zu1QZNH6ZBOoCnGp7RHh" },
-        { name: "Ashram Visit", url: "https://zfrmz.in/nQKQf4fD87adthF1K8fG" },
+        { name: "Rudrabhishek", slug: "rudrabhishek", url: "https://zfrmz.in/zu1QZNH6ZBOoCnGp7RHh" },
+        { name: "Ashram Visit", slug: "ashram-visit", url: "https://zfrmz.in/nQKQf4fD87adthF1K8fG" },
         {
           name: "Diksha Request",
+          slug: "diksha-request",
           url: "https://zfrmz.in/ZXmxavQkJmUFIDC5xCWE",
         },
         {
           name: "Manokamna Jyoti Kalash",
+          slug: "manokamna-jyoti-kalash",
           url: "https://zfrmz.in/Hyl0pOGnOgGzueoSxLKo",
         },
         {
           name: "Jap Submission",
+          slug: "jap-submission",
           url: "https://zfrmz.in/LaKApSWMkpsAMU6bUSc2",
         },
       ],
@@ -52,7 +57,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-amber-300 backdrop-blur-sm z-50 shadow-sm sticky top-0">
+    <header className="!bg-[#F7F1E7] backdrop-blur-sm z-50 shadow-sm sticky top-0">
       <nav className="section-container py-4 px-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
@@ -84,12 +89,12 @@ export default function Header() {
                   }}
                   className="flex items-center cursor-pointer text-earth-brown hover:text-accent-orange transition-colors font-semibold italic text-sm"
                 >
-                  <Link
+                  <p
                     className="hover:scale-105 transition-all duration-200"
-                    href={item.href || "#"}
+                    // href={item.href || "#"}
                   >
                     {item.name}
-                  </Link>
+                  </p>
 
                   {/* Arrow Icon */}
                   {item.Children && (
@@ -105,9 +110,9 @@ export default function Header() {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         className="lucide lucide-chevron-down-icon lucide-chevron-down"
                       >
                         <path d="m6 9 6 6 6-6" />
@@ -119,16 +124,17 @@ export default function Header() {
                 {/* Dropdown */}
                 {item.Children && openDropdown === item.name && (
                   <div className="absolute top-full left-[50%] -translate-x-[50%] mt-2 w-56 bg-amber-200 shadow-lg rounded-md z-50">
-                    {item.Children.map((child) => (
-                      <a
+                    {item.Children.map((child, index) => (
+                      <p
                         key={child.name}
-                        href={child.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-accent-orange hover:bg-white hover:scale-105 transition-all duration-200 font-semibold"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-accent-orange hover:bg-white hover:scale-105 transition-all duration-200 font-semibold cursor-pointer"
+                        onClick={() => {
+                          router.push(`/form/${item.Children[index].slug}`)
+                          setOpenDropdown(null)
+                        }}
                       >
                         {child.name}
-                      </a>
+                      </p>
                     ))}
                   </div>
                 )}
