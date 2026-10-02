@@ -89,12 +89,12 @@ export default function Header() {
                   }}
                   className="flex items-center cursor-pointer text-earth-brown hover:text-accent-orange transition-colors font-semibold italic text-sm"
                 >
-                  <p
+                  <Link
                     className="hover:scale-105 transition-all duration-200"
-                    // href={item.href || "#"}
+                    href={item.href || "#"}
                   >
                     {item.name}
-                  </p>
+                  </Link>
 
                   {/* Arrow Icon */}
                   {item.Children && (
@@ -123,7 +123,7 @@ export default function Header() {
 
                 {/* Dropdown */}
                 {item.Children && openDropdown === item.name && (
-                  <div className="absolute top-full left-[50%] -translate-x-[50%] mt-2 w-56 bg-amber-200 shadow-lg rounded-md z-50">
+                  <div className="absolute top-full left-[50%] -translate-x-[50%] mt-2 w-56 bg-[#F7F1E7] shadow-lg rounded-md z-50">
                     {item.Children.map((child, index) => (
                       <p
                         key={child.name}
@@ -210,17 +210,14 @@ export default function Header() {
                 {/* Dropdown Items */}
                 {item.Children && openMobileDropdown === item.name && (
                   <div className="pl-4">
-                    {item.Children.map((child) => (
-                      <a
+                    {item.Children.map((child, index) => (
+                      <p
                         key={child.name}
-                        href={child.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className="block py-2 text-sm text-gray-600 hover:text-accent-orange font-semibold"
-                        onClick={() => setMobileMenuOpen(false)}
+                        onClick={() => router.push(`/form/${item.Children[index].slug}`)}
                       >
                         {child.name}
-                      </a>
+                      </p>
                     ))}
                   </div>
                 )}
